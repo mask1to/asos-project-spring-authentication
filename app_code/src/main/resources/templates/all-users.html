@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/header :: header"/>
+<body>
+
+<div th:replace="includes/navbar :: navbar"/>
+
+<section class="section-padding pt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-3">All users</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user: ${all_users}">
+                            <td th:text="${user.id}">User ID</td>
+                            <td th:text="${user.firstName}">First name</td>
+                            <td th:text="${user.lastName}">Last Name</td>
+                            <td th:text="${user.email}">E-mail</td>
+                            <td>[
+                                <th:block th:each="role: ${user.roles}">
+                                    <span th:if="${role.name == 'ROLE_ADMIN'}" th:text="Admin"></span>
+                                    <span th:if="${role.name == 'ROLE_PRE_USER'}" th:text="User"></span>
+                                </th:block>
+                                ]
+                            </td>
+                            <td><a th:href="@{'/all-users/' + ${user.id}}">Edit</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div><!--- END CONTAINER -->
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

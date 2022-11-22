@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/header :: header"/>
+<body>
+
+<div th:replace="includes/navbar :: navbar"/>
+
+<section class="section-padding pt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-3">All users</h1>
+                <form th:action="@{/user/edit}" th:object="${user}"
+                      method="post">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="m-3">
+                        <div class="form-group row">
+                            <label class="col-form-label d-block">E-mail: </label>
+                            <input type="email" th:field="*{email}" class="form-control" required/>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="d-block col-form-label">First Name: </label>
+                            <input type="text" th:field="*{firstName}" class="form-control"
+                                   required minlength="2" maxlength="20"/>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="d-block col-form-label">Last Name: </label>
+                            <input type="text" th:field="*{lastName}" class="form-control"
+                                   required minlength="2" maxlength="20"/>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="d-block col-form-label w-100">Roles: </label>
+                            <div>
+                                <div class="checkbox" th:each="role: ${listRoles}">
+                                    <input th:field="*{roles}" type="checkbox" th:value="${role}"/>
+                                    <label th:text="${role.name}" class="mb-0 ml-2"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!--- END CONTAINER -->
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

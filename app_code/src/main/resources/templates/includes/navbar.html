@@ -1,0 +1,33 @@
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light py-3">
+    <a class="navbar-brand" th:href="@{/}">ASOS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav w-100">
+            <li sec:authorize="!isAuthenticated() || !hasRole('ROLE_USER')"th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}" class="nav-item">
+                <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li sec:authorize="isAuthenticated() && hasRole('ROLE_USER')" th:classappend="${#httpServletRequest.getRequestURI() == '/home' ? 'active':''}" class="nav-item">
+                <a class="nav-link" th:href="@{/home}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}" class="nav-item" sec:authorize="!isAuthenticated() || !hasRole('ROLE_USER')">
+                <a class="nav-link" th:href="@{/login}">Log in</a>
+            </li>
+            <li th:classappend="${#httpServletRequest.getRequestURI() == '/welcome' || #httpServletRequest.getRequestURI() == '/registration' ? 'active':''}" class="nav-item" sec:authorize="!isAuthenticated() || !hasRole('ROLE_USER')">
+                <a class="nav-link" th:href="@{/welcome}">Registration</a>
+            </li>
+            <li th:classappend="${#httpServletRequest.getRequestURI() == '/about-team' ? 'active':''}" class="nav-item">
+                <a class="nav-link" th:href="@{/about-team}">About team</a>
+            </li>
+            <li th:classappend="${#httpServletRequest.getRequestURI() == '/all-users' ? 'active':''}" class="nav-item" sec:authorize="hasRole('ROLE_ADMIN') && hasRole('ROLE_USER')">
+                <a class="nav-link" th:href="@{/all-users}">All users</a>
+            </li>
+            <li class="nav-item ml-auto" sec:authorize="isAuthenticated()">
+                <a class="btn btn-danger" th:href="@{/logout}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>

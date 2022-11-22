@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="includes/header :: header"/>
+<body>
+
+<!--<div th:replace="includes/navbar :: navbar"/>-->
+
+<section class="pt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                <h3>Please click button to send notification</h3>
+                <form th:action="@{/authyNotificationLogin}" method="post" th:object="${user}">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Send notification</button>
+                    </div>
+                </form>
+                <a class="d-inline-block text-underline" th:href="@{'/authyLogin'}">Use OTP token</a>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    /*$(document).ready(function() {
+        $('.btn-success').on('click', function() {
+            $(this).attr('disabled', 'disabled');
+            setTimeout(function() {
+                $('.btn-success').removeAttr('disabled');
+            }, 180000)
+        })
+    })*/
+</script>
+</body>
+</html>

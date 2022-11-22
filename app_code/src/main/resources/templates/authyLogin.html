@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="includes/header :: header"/>
+<body>
+
+<!--<div th:replace="includes/navbar :: navbar"/>-->
+
+<section class="pt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                <form th:action="@{/authyLogin}" method="post" th:object="${user}">
+                    <div class="form-group">
+                        <label class="control-label" for="secret_code"> Code from Authy: </label>
+                        <input id="secret_code" class="form-control" th:field="*{secret_code}"
+                               required autofocus="autofocus"/>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Finish login</button>
+                    </div>
+                </form>
+                <a class="d-inline-block text-underline" th:href="@{'/authyNotificationLogin'}">Use notification</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>
