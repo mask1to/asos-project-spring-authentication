@@ -74,11 +74,6 @@ public class MainController {
         return "about-team";
     }
 
-    @GetMapping("/project-presentation")
-    public String projectPresentation() {
-        return "project-presentation";
-    }
-
     @GetMapping("/all-users")
     public String GetAllUsers(Model model, HttpServletRequest httpServletRequest) {
         if (httpServletRequest.isUserInRole("ROLE_ADMIN") && httpServletRequest.isUserInRole("ROLE_USER")) {
@@ -124,17 +119,4 @@ public class MainController {
 
     }
 
-    @RequestMapping(value = "/download", method = RequestMethod.GET)
-    public void downloadFile(HttpServletResponse httpServletResponse) throws IOException {
-        Resource resource = resourceLoader.getResource("classpath:text_files/tp2.pdf");
-        if (resource.exists()) {
-            httpServletResponse.setContentType("application/pdf");
-            httpServletResponse.setHeader("Content-Disposition",
-                    String.format("attachment; filename=" +
-                            resource.getFilename()));
-            httpServletResponse.setContentLength((int) resource.contentLength());
-            InputStream inputStream = resource.getInputStream();
-            FileCopyUtils.copy(inputStream, httpServletResponse.getOutputStream());
-        }
-    }
 }
